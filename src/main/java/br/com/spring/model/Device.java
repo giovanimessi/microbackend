@@ -3,11 +3,16 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "tb_devices")
 public class Device {
@@ -30,6 +35,10 @@ public class Device {
 	
 	@Column(name = "create_time", nullable = false)
 	private LocalDateTime createTime;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "device_type",nullable = false)
+	private DeviceType devicetype;
 	
 	
 
