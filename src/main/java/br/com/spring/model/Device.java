@@ -17,7 +17,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "tb_devices")
+@Table(name = "devices")
 public class Device {
 	
 	//tipo de dispositivo

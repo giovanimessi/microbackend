@@ -10,6 +10,6 @@ public interface PurchaseItem {
 	DeviceType getType();
 	Double getPrice();
 	String getColor();
-	LocalDateTime getPurchase();
+	LocalDateTime getPurchaseTime();
 
 }
