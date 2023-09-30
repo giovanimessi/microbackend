@@ -15,16 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @SpringBootApplication
 public class MicrobackendApplication {
 	
-	//criptografa senha
-	//passsowrd
 	
-	@Bean
-	public PasswordEncoder passowordEncoder() {
-		
-		return new BCryptPasswordEncoder();
-		
-	}
 	
+
 	
 
 	public static void main(String[] args) {
