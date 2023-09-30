@@ -4,6 +4,7 @@ package br.com.spring.security;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,8 +30,16 @@ public class CustomUserDetailsService implements UserDetailsService{
       User user = userService.findByUsername(username)
     		  .orElseThrow(() -> new UsernameNotFoundException(username));
       
-      Set<SimpleGrantedAuthority> authorities = Set.of(SecurityUtils.convertToAuthority(user.getRole().name()));
-		return null;
+      Set<GrantedAuthority> authorities = Set.of(SecurityUtils.convertToAuthority(user.getRole().name()));
+	
+      
+      return UserPrincipal.builder()
+    		  .user(user)
+    		  .id(user.getId())
+    		  .username(username)
+    		  .password(user.getPassword())
+    		  .authorities(authorities)
+    		  .build();
 	}
 
 }
