@@ -12,8 +12,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import br.com.spring.security.jwt.JwtAuthorizationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -28,6 +31,14 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth ) throws Exception {
 		
 		auth.userDetailsService(customUserDetailsService).passwordEncoder(passowordEncoder());
+		
+	}
+	
+	@Bean
+	public JwtAuthorizationFilter jwtAuthorizationFilter(){
+		
+		return new JwtAuthorizationFilter();
+		
 	}
 	
 	@Override
@@ -42,6 +53,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	.anyRequest().authenticated();
 	
 	
+	
+	http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+
 	}
 	@Bean(name = BeanIds.AUTHENTICATION_MANAGER)
 	@Override

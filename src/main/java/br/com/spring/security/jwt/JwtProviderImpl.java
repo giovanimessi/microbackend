@@ -84,6 +84,7 @@ public class JwtProviderImpl implements JwtProvider{
 		
 	}
 	
+	@Override
 	public boolean isTokenValid(HttpServletRequest request) {
 		
 		Claims claims = extractClaims(request);
@@ -92,8 +93,10 @@ public class JwtProviderImpl implements JwtProvider{
 			return false;
 		}
 		
-		if(claims.getExpiration().before(new Date())) {
-			
+		if(claims.getExpiration().before(new Date(JWT_EXPIRATION_IN_MS)))
+		{
+			return false;
+	
 		}
 		
 		return true;
