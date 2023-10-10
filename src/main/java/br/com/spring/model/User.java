@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Transient;
+
 import lombok.Data;
 
 import javax.persistence.Id;
@@ -50,6 +52,11 @@ public class User implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role", nullable = false)
 	private Role role;
+	
+
+	@Transient
+	private String Token;
+
 	
 	
 }
